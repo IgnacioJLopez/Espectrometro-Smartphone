@@ -1,0 +1,36 @@
+com/example/android/camera2/basic/fragments/PermissionsFragmentDirections.java
+ com.example.android.camera2.basic.fragments.PermissionsFragmentDirections
+com/example/android/camera2/basic/fragments/AutoRotateFragmentDirections.java
+ com.example.android.camera2.basic.fragments.AutoRotateFragmentDirections
+ com.example.android.camera2.basic.fragments.AutoRotateFragmentDirections$1
+ com.example.android.camera2.basic.fragments.AutoRotateFragmentDirections$ActionAutoRotateFragmentToCameraFragment
+com/example/android/camera2/basic/fragments/CameraFragmentDirections.java
+ com.example.android.camera2.basic.fragments.CameraFragmentDirections
+ com.example.android.camera2.basic.fragments.CameraFragmentDirections$1
+ com.example.android.camera2.basic.fragments.CameraFragmentDirections$ActionCameraFragmentToImagenEspectroFragment
+com/example/android/camera2/basic/fragments/ImagenEspectroFragmentArgs.java
+ com.example.android.camera2.basic.fragments.ImagenEspectroFragmentArgs
+ com.example.android.camera2.basic.fragments.ImagenEspectroFragmentArgs$1
+ com.example.android.camera2.basic.fragments.ImagenEspectroFragmentArgs$Builder
+com/example/android/camera2/basic/fragments/SelectorFragmentDirections.java
+ com.example.android.camera2.basic.fragments.SelectorFragmentDirections
+ com.example.android.camera2.basic.fragments.SelectorFragmentDirections$1
+ com.example.android.camera2.basic.fragments.SelectorFragmentDirections$ActionSelectorFragmentToMenuFragment
+com/example/android/camera2/basic/fragments/AutoRotateFragmentArgs.java
+ com.example.android.camera2.basic.fragments.AutoRotateFragmentArgs
+ com.example.android.camera2.basic.fragments.AutoRotateFragmentArgs$1
+ com.example.android.camera2.basic.fragments.AutoRotateFragmentArgs$Builder
+com/example/android/camera2/basic/BuildConfig.java
+ com.example.android.camera2.basic.BuildConfig
+com/example/android/camera2/basic/fragments/MenuFragmentArgs.java
+ com.example.android.camera2.basic.fragments.MenuFragmentArgs
+ com.example.android.camera2.basic.fragments.MenuFragmentArgs$1
+ com.example.android.camera2.basic.fragments.MenuFragmentArgs$Builder
+com/example/android/camera2/basic/fragments/MenuFragmentDirections.java
+ com.example.android.camera2.basic.fragments.MenuFragmentDirections
+ com.example.android.camera2.basic.fragments.MenuFragmentDirections$1
+ com.example.android.camera2.basic.fragments.MenuFragmentDirections$ActionMenuFragmentToAutoRotateFragment
+com/example/android/camera2/basic/fragments/CameraFragmentArgs.java
+ com.example.android.camera2.basic.fragments.CameraFragmentArgs
+ com.example.android.camera2.basic.fragments.CameraFragmentArgs$1
+ com.example.android.camera2.basic.fragments.CameraFragmentArgs$Builder

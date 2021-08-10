@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/nacho/Documentos/Labo6y7/Software/Apps/Espectrometro smartphone/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-watch-v20/values-watch-v20.xml",
+            "map": [
+                {
+                    "source": "/home/nacho/.gradle/caches/transforms-2/files-2.1/dff3305d8075dd08a62f480e5e516d8b/appcompat-1.2.0/res/values-watch-v20/values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,5,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,214,385",
+                        "endLines": "4,7,10",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "209,380,553"
+                    }
+                }
+            ]
+        }
+    ]
+}
