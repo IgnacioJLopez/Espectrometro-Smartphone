@@ -17,4 +17,4 @@ la cámara.
 Screenshots
 -------------
 
-<img src="screenshots/main.jpg" height="400" alt="Screenshot"/> 
+<img src="screenshots/main.jpeg" height="400" alt="Screenshot"/> 
