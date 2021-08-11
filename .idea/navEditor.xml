@@ -13,13 +13,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="508" />
-                            <option name="y" value="450" />
+                            <option name="x" value="73" />
+                            <option name="y" value="308" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_autoRotateFragment_to_camera_fragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_autoRotateFragment_to_permissions">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -34,13 +39,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="754" />
-                            <option name="y" value="414" />
+                            <option name="x" value="223" />
+                            <option name="y" value="694" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_camera_fragment_to_longOndaFragment">
+                            <entry key="action_camera_fragment_to_imagenEspectroFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -55,73 +60,14 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="image_viewer_fragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="imagenEspectroFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1691" />
-                            <option name="y" value="455" />
+                            <option name="x" value="445" />
+                            <option name="y" value="697" />
                           </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="longOndaFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="1043" />
-                            <option name="y" value="489" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_longOndaFragment_to_medicionFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_longOndaFragment_to_permissions_fragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="medicionFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="1300" />
-                            <option name="y" value="454" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_medicionFragment_to_imagenEspectroFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -131,8 +77,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="256" />
-                            <option name="y" value="698" />
+                            <option name="x" value="-224" />
+                            <option name="y" value="692" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -152,8 +98,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-307" />
-                            <option name="y" value="657" />
+                            <option name="x" value="-618" />
+                            <option name="y" value="696" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -173,8 +119,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="39" />
-                            <option name="y" value="657" />
+                            <option name="x" value="-412" />
+                            <option name="y" value="695" />
                           </Point>
                         </option>
                         <option name="myPositions">

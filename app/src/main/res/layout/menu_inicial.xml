@@ -6,27 +6,27 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/CalibLongOnda"
+        android:id="@+id/MedirEspectro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_longonda"
+        android:text="@string/btn_espectro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/CalibIntensidad"
+        android:id="@+id/MedirAbsorbancia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
-        android:text="@string/btn_intensidad"
+        android:text="@string/btn_absorbancia"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CalibLongOnda" />
+        app:layout_constraintTop_toBottomOf="@+id/MedirEspectro" />
 
     <Button
-        android:id="@+id/AutoRotar"
+        android:id="@+id/Calibrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="190dp"

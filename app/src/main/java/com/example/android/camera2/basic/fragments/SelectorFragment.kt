@@ -1,19 +1,3 @@
-/*
- * Copyright 2020 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.example.android.camera2.basic.fragments
 
 import android.annotation.SuppressLint
@@ -33,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.camera.utils.GenericListAdapter
 import com.example.android.camera2.basic.R
+import java.util.*
 
 class SelectorFragment : Fragment() {
 
@@ -106,9 +91,17 @@ class SelectorFragment : Fragment() {
                 val outputFormats = characteristics.get(
                         CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)!!.outputFormats
 
+
                 // All cameras *must* support JPEG output so we don't need to check characteristics
                 availableCameras.add(FormatItem(
                         "$orientation JPEG ($id)", id, ImageFormat.JPEG))
+
+
+                //Return cameras that support YUV format
+                if (outputFormats.contains((ImageFormat.YUV_420_888))){
+                    availableCameras.add(FormatItem(
+                        "$orientation YUV_420 ($id)", id, ImageFormat.YUV_420_888))
+                }
 
                 // Return cameras that support RAW capability
                 if (capabilities.contains(

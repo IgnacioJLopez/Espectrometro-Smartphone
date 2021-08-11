@@ -1,9 +1,15 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.appcompat:appcompat-resources:1.1.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8cccb0ba026a85bcf4798505be4add4f/jetified-appcompat-resources-1.1.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8cccb0ba026a85bcf4798505be4add4f/jetified-appcompat-resources-1.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8cccb0ba026a85bcf4798505be4add4f/jetified-appcompat-resources-1.1.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1f0a8c25f5ac72c44a492d979199e2a1/jetified-appcompat-resources-1.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1f0a8c25f5ac72c44a492d979199e2a1/jetified-appcompat-resources-1.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1f0a8c25f5ac72c44a492d979199e2a1/jetified-appcompat-resources-1.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f07e10248f9fc68fff3e14ac73967f61/jetified-appcompat-resources-1.1.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f07e10248f9fc68fff3e14ac73967f61/jetified-appcompat-resources-1.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f07e10248f9fc68fff3e14ac73967f61/jetified-appcompat-resources-1.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ea8110770db09d1665c199a24f33628e/jetified-appcompat-resources-1.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ea8110770db09d1665c199a24f33628e/jetified-appcompat-resources-1.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ea8110770db09d1665c199a24f33628e/jetified-appcompat-resources-1.1.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

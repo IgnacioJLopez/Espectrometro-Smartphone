@@ -4,6 +4,12 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bf087d7248ac9f814e730f1001d37844/constraintlayout-2.0.4/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bf087d7248ac9f814e730f1001d37844/constraintlayout-2.0.4/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bf087d7248ac9f814e730f1001d37844/constraintlayout-2.0.4/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5b207a6e92bfe1ea4fab9517b24d218a/constraintlayout-2.0.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5b207a6e92bfe1ea4fab9517b24d218a/constraintlayout-2.0.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5b207a6e92bfe1ea4fab9517b24d218a/constraintlayout-2.0.4/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/134f85a2f18cbd16cf6e306214979213/constraintlayout-2.0.4/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/134f85a2f18cbd16cf6e306214979213/constraintlayout-2.0.4/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/134f85a2f18cbd16cf6e306214979213/constraintlayout-2.0.4/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

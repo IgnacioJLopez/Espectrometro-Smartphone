@@ -2,6 +2,7 @@ package com.example.android.camera2.basic.fragments;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.navigation.ActionOnlyNavDirections;
 import androidx.navigation.NavDirections;
 import com.example.android.camera2.basic.R;
 import java.lang.IllegalArgumentException;
@@ -17,15 +18,21 @@ public class AutoRotateFragmentDirections {
 
   @NonNull
   public static ActionAutoRotateFragmentToCameraFragment actionAutoRotateFragmentToCameraFragment(
-      @NonNull String cameraId, int pixelFormat, float tita, float b) {
-    return new ActionAutoRotateFragmentToCameraFragment(cameraId, pixelFormat, tita, b);
+      @NonNull String cameraId, int pixelFormat, float tita, float b, int yi, int yf,
+      float relacion, int ordenCero) {
+    return new ActionAutoRotateFragmentToCameraFragment(cameraId, pixelFormat, tita, b, yi, yf, relacion, ordenCero);
+  }
+
+  @NonNull
+  public static NavDirections actionAutoRotateFragmentToPermissions() {
+    return new ActionOnlyNavDirections(R.id.action_autoRotateFragment_to_permissions);
   }
 
   public static class ActionAutoRotateFragmentToCameraFragment implements NavDirections {
     private final HashMap arguments = new HashMap();
 
     private ActionAutoRotateFragmentToCameraFragment(@NonNull String cameraId, int pixelFormat,
-        float tita, float b) {
+        float tita, float b, int yi, int yf, float relacion, int ordenCero) {
       if (cameraId == null) {
         throw new IllegalArgumentException("Argument \"camera_id\" is marked as non-null but was passed a null value.");
       }
@@ -33,6 +40,10 @@ public class AutoRotateFragmentDirections {
       this.arguments.put("pixel_format", pixelFormat);
       this.arguments.put("tita", tita);
       this.arguments.put("b", b);
+      this.arguments.put("yi", yi);
+      this.arguments.put("yf", yf);
+      this.arguments.put("relacion", relacion);
+      this.arguments.put("ordenCero", ordenCero);
     }
 
     @NonNull
@@ -62,6 +73,30 @@ public class AutoRotateFragmentDirections {
       return this;
     }
 
+    @NonNull
+    public ActionAutoRotateFragmentToCameraFragment setYi(int yi) {
+      this.arguments.put("yi", yi);
+      return this;
+    }
+
+    @NonNull
+    public ActionAutoRotateFragmentToCameraFragment setYf(int yf) {
+      this.arguments.put("yf", yf);
+      return this;
+    }
+
+    @NonNull
+    public ActionAutoRotateFragmentToCameraFragment setRelacion(float relacion) {
+      this.arguments.put("relacion", relacion);
+      return this;
+    }
+
+    @NonNull
+    public ActionAutoRotateFragmentToCameraFragment setOrdenCero(int ordenCero) {
+      this.arguments.put("ordenCero", ordenCero);
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     @NonNull
@@ -82,6 +117,22 @@ public class AutoRotateFragmentDirections {
       if (arguments.containsKey("b")) {
         float b = (float) arguments.get("b");
         __result.putFloat("b", b);
+      }
+      if (arguments.containsKey("yi")) {
+        int yi = (int) arguments.get("yi");
+        __result.putInt("yi", yi);
+      }
+      if (arguments.containsKey("yf")) {
+        int yf = (int) arguments.get("yf");
+        __result.putInt("yf", yf);
+      }
+      if (arguments.containsKey("relacion")) {
+        float relacion = (float) arguments.get("relacion");
+        __result.putFloat("relacion", relacion);
+      }
+      if (arguments.containsKey("ordenCero")) {
+        int ordenCero = (int) arguments.get("ordenCero");
+        __result.putInt("ordenCero", ordenCero);
       }
       return __result;
     }
@@ -110,6 +161,26 @@ public class AutoRotateFragmentDirections {
     @SuppressWarnings("unchecked")
     public float getB() {
       return (float) arguments.get("b");
+    }
+
+    @SuppressWarnings("unchecked")
+    public int getYi() {
+      return (int) arguments.get("yi");
+    }
+
+    @SuppressWarnings("unchecked")
+    public int getYf() {
+      return (int) arguments.get("yf");
+    }
+
+    @SuppressWarnings("unchecked")
+    public float getRelacion() {
+      return (float) arguments.get("relacion");
+    }
+
+    @SuppressWarnings("unchecked")
+    public int getOrdenCero() {
+      return (int) arguments.get("ordenCero");
     }
 
     @Override
@@ -145,6 +216,30 @@ public class AutoRotateFragmentDirections {
       if (Float.compare(that.getB(), getB()) != 0) {
         return false;
       }
+      if (arguments.containsKey("yi") != that.arguments.containsKey("yi")) {
+        return false;
+      }
+      if (getYi() != that.getYi()) {
+        return false;
+      }
+      if (arguments.containsKey("yf") != that.arguments.containsKey("yf")) {
+        return false;
+      }
+      if (getYf() != that.getYf()) {
+        return false;
+      }
+      if (arguments.containsKey("relacion") != that.arguments.containsKey("relacion")) {
+        return false;
+      }
+      if (Float.compare(that.getRelacion(), getRelacion()) != 0) {
+        return false;
+      }
+      if (arguments.containsKey("ordenCero") != that.arguments.containsKey("ordenCero")) {
+        return false;
+      }
+      if (getOrdenCero() != that.getOrdenCero()) {
+        return false;
+      }
       if (getActionId() != that.getActionId()) {
         return false;
       }
@@ -158,6 +253,10 @@ public class AutoRotateFragmentDirections {
       result = 31 * result + getPixelFormat();
       result = 31 * result + Float.floatToIntBits(getTita());
       result = 31 * result + Float.floatToIntBits(getB());
+      result = 31 * result + getYi();
+      result = 31 * result + getYf();
+      result = 31 * result + Float.floatToIntBits(getRelacion());
+      result = 31 * result + getOrdenCero();
       result = 31 * result + getActionId();
       return result;
     }
@@ -169,6 +268,10 @@ public class AutoRotateFragmentDirections {
           + ", pixelFormat=" + getPixelFormat()
           + ", tita=" + getTita()
           + ", b=" + getB()
+          + ", yi=" + getYi()
+          + ", yf=" + getYf()
+          + ", relacion=" + getRelacion()
+          + ", ordenCero=" + getOrdenCero()
           + "}";
     }
   }

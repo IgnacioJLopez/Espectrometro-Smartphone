@@ -1,11 +1,8 @@
 package com.example.android.camera2.basic.fragments;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.navigation.NavArgs;
-import java.io.Serializable;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
 import java.lang.Override;
@@ -28,126 +25,112 @@ public class ImagenEspectroFragmentArgs implements NavArgs {
   public static ImagenEspectroFragmentArgs fromBundle(@NonNull Bundle bundle) {
     ImagenEspectroFragmentArgs __result = new ImagenEspectroFragmentArgs();
     bundle.setClassLoader(ImagenEspectroFragmentArgs.class.getClassLoader());
-    if (bundle.containsKey("bitmap")) {
-      Bitmap bitmap;
-      if (Parcelable.class.isAssignableFrom(Bitmap.class) || Serializable.class.isAssignableFrom(Bitmap.class)) {
-        bitmap = (Bitmap) bundle.get("bitmap");
-      } else {
-        throw new UnsupportedOperationException(Bitmap.class.getName() + " must implement Parcelable or Serializable or must be an Enum.");
+    if (bundle.containsKey("datosX")) {
+      int[] datosX;
+      datosX = bundle.getIntArray("datosX");
+      if (datosX == null) {
+        throw new IllegalArgumentException("Argument \"datosX\" is marked as non-null but was passed a null value.");
       }
-      if (bitmap == null) {
-        throw new IllegalArgumentException("Argument \"bitmap\" is marked as non-null but was passed a null value.");
+      __result.arguments.put("datosX", datosX);
+    } else {
+      throw new IllegalArgumentException("Required argument \"datosX\" is missing and does not have an android:defaultValue");
+    }
+    if (bundle.containsKey("datosL")) {
+      float[] datosL;
+      datosL = bundle.getFloatArray("datosL");
+      if (datosL == null) {
+        throw new IllegalArgumentException("Argument \"datosL\" is marked as non-null but was passed a null value.");
       }
-      __result.arguments.put("bitmap", bitmap);
+      __result.arguments.put("datosL", datosL);
     } else {
-      throw new IllegalArgumentException("Required argument \"bitmap\" is missing and does not have an android:defaultValue");
+      throw new IllegalArgumentException("Required argument \"datosL\" is missing and does not have an android:defaultValue");
     }
-    if (bundle.containsKey("tita")) {
-      float tita;
-      tita = bundle.getFloat("tita");
-      __result.arguments.put("tita", tita);
-    } else {
-      throw new IllegalArgumentException("Required argument \"tita\" is missing and does not have an android:defaultValue");
-    }
-    if (bundle.containsKey("b")) {
-      float b;
-      b = bundle.getFloat("b");
-      __result.arguments.put("b", b);
-    } else {
-      throw new IllegalArgumentException("Required argument \"b\" is missing and does not have an android:defaultValue");
-    }
-    if (bundle.containsKey("h")) {
-      float[] h;
-      h = bundle.getFloatArray("h");
-      if (h == null) {
-        throw new IllegalArgumentException("Argument \"h\" is marked as non-null but was passed a null value.");
+    if (bundle.containsKey("datosR")) {
+      float[] datosR;
+      datosR = bundle.getFloatArray("datosR");
+      if (datosR == null) {
+        throw new IllegalArgumentException("Argument \"datosR\" is marked as non-null but was passed a null value.");
       }
-      __result.arguments.put("h", h);
+      __result.arguments.put("datosR", datosR);
     } else {
-      throw new IllegalArgumentException("Required argument \"h\" is missing and does not have an android:defaultValue");
+      throw new IllegalArgumentException("Required argument \"datosR\" is missing and does not have an android:defaultValue");
     }
-    if (bundle.containsKey("relacion")) {
-      float relacion;
-      relacion = bundle.getFloat("relacion");
-      __result.arguments.put("relacion", relacion);
+    if (bundle.containsKey("datosG")) {
+      float[] datosG;
+      datosG = bundle.getFloatArray("datosG");
+      if (datosG == null) {
+        throw new IllegalArgumentException("Argument \"datosG\" is marked as non-null but was passed a null value.");
+      }
+      __result.arguments.put("datosG", datosG);
     } else {
-      throw new IllegalArgumentException("Required argument \"relacion\" is missing and does not have an android:defaultValue");
+      throw new IllegalArgumentException("Required argument \"datosG\" is missing and does not have an android:defaultValue");
     }
-    if (bundle.containsKey("ordenCero")) {
-      int ordenCero;
-      ordenCero = bundle.getInt("ordenCero");
-      __result.arguments.put("ordenCero", ordenCero);
+    if (bundle.containsKey("datosB")) {
+      float[] datosB;
+      datosB = bundle.getFloatArray("datosB");
+      if (datosB == null) {
+        throw new IllegalArgumentException("Argument \"datosB\" is marked as non-null but was passed a null value.");
+      }
+      __result.arguments.put("datosB", datosB);
     } else {
-      throw new IllegalArgumentException("Required argument \"ordenCero\" is missing and does not have an android:defaultValue");
+      throw new IllegalArgumentException("Required argument \"datosB\" is missing and does not have an android:defaultValue");
     }
     return __result;
   }
 
   @SuppressWarnings("unchecked")
   @NonNull
-  public Bitmap getBitmap() {
-    return (Bitmap) arguments.get("bitmap");
-  }
-
-  @SuppressWarnings("unchecked")
-  public float getTita() {
-    return (float) arguments.get("tita");
-  }
-
-  @SuppressWarnings("unchecked")
-  public float getB() {
-    return (float) arguments.get("b");
+  public int[] getDatosX() {
+    return (int[]) arguments.get("datosX");
   }
 
   @SuppressWarnings("unchecked")
   @NonNull
-  public float[] getH() {
-    return (float[]) arguments.get("h");
+  public float[] getDatosL() {
+    return (float[]) arguments.get("datosL");
   }
 
   @SuppressWarnings("unchecked")
-  public float getRelacion() {
-    return (float) arguments.get("relacion");
+  @NonNull
+  public float[] getDatosR() {
+    return (float[]) arguments.get("datosR");
   }
 
   @SuppressWarnings("unchecked")
-  public int getOrdenCero() {
-    return (int) arguments.get("ordenCero");
+  @NonNull
+  public float[] getDatosG() {
+    return (float[]) arguments.get("datosG");
+  }
+
+  @SuppressWarnings("unchecked")
+  @NonNull
+  public float[] getDatosB() {
+    return (float[]) arguments.get("datosB");
   }
 
   @SuppressWarnings("unchecked")
   @NonNull
   public Bundle toBundle() {
     Bundle __result = new Bundle();
-    if (arguments.containsKey("bitmap")) {
-      Bitmap bitmap = (Bitmap) arguments.get("bitmap");
-      if (Parcelable.class.isAssignableFrom(Bitmap.class) || bitmap == null) {
-        __result.putParcelable("bitmap", Parcelable.class.cast(bitmap));
-      } else if (Serializable.class.isAssignableFrom(Bitmap.class)) {
-        __result.putSerializable("bitmap", Serializable.class.cast(bitmap));
-      } else {
-        throw new UnsupportedOperationException(Bitmap.class.getName() + " must implement Parcelable or Serializable or must be an Enum.");
-      }
+    if (arguments.containsKey("datosX")) {
+      int[] datosX = (int[]) arguments.get("datosX");
+      __result.putIntArray("datosX", datosX);
     }
-    if (arguments.containsKey("tita")) {
-      float tita = (float) arguments.get("tita");
-      __result.putFloat("tita", tita);
+    if (arguments.containsKey("datosL")) {
+      float[] datosL = (float[]) arguments.get("datosL");
+      __result.putFloatArray("datosL", datosL);
     }
-    if (arguments.containsKey("b")) {
-      float b = (float) arguments.get("b");
-      __result.putFloat("b", b);
+    if (arguments.containsKey("datosR")) {
+      float[] datosR = (float[]) arguments.get("datosR");
+      __result.putFloatArray("datosR", datosR);
     }
-    if (arguments.containsKey("h")) {
-      float[] h = (float[]) arguments.get("h");
-      __result.putFloatArray("h", h);
+    if (arguments.containsKey("datosG")) {
+      float[] datosG = (float[]) arguments.get("datosG");
+      __result.putFloatArray("datosG", datosG);
     }
-    if (arguments.containsKey("relacion")) {
-      float relacion = (float) arguments.get("relacion");
-      __result.putFloat("relacion", relacion);
-    }
-    if (arguments.containsKey("ordenCero")) {
-      int ordenCero = (int) arguments.get("ordenCero");
-      __result.putInt("ordenCero", ordenCero);
+    if (arguments.containsKey("datosB")) {
+      float[] datosB = (float[]) arguments.get("datosB");
+      __result.putFloatArray("datosB", datosB);
     }
     return __result;
   }
@@ -161,40 +144,34 @@ public class ImagenEspectroFragmentArgs implements NavArgs {
         return false;
     }
     ImagenEspectroFragmentArgs that = (ImagenEspectroFragmentArgs) object;
-    if (arguments.containsKey("bitmap") != that.arguments.containsKey("bitmap")) {
+    if (arguments.containsKey("datosX") != that.arguments.containsKey("datosX")) {
       return false;
     }
-    if (getBitmap() != null ? !getBitmap().equals(that.getBitmap()) : that.getBitmap() != null) {
+    if (getDatosX() != null ? !getDatosX().equals(that.getDatosX()) : that.getDatosX() != null) {
       return false;
     }
-    if (arguments.containsKey("tita") != that.arguments.containsKey("tita")) {
+    if (arguments.containsKey("datosL") != that.arguments.containsKey("datosL")) {
       return false;
     }
-    if (Float.compare(that.getTita(), getTita()) != 0) {
+    if (getDatosL() != null ? !getDatosL().equals(that.getDatosL()) : that.getDatosL() != null) {
       return false;
     }
-    if (arguments.containsKey("b") != that.arguments.containsKey("b")) {
+    if (arguments.containsKey("datosR") != that.arguments.containsKey("datosR")) {
       return false;
     }
-    if (Float.compare(that.getB(), getB()) != 0) {
+    if (getDatosR() != null ? !getDatosR().equals(that.getDatosR()) : that.getDatosR() != null) {
       return false;
     }
-    if (arguments.containsKey("h") != that.arguments.containsKey("h")) {
+    if (arguments.containsKey("datosG") != that.arguments.containsKey("datosG")) {
       return false;
     }
-    if (getH() != null ? !getH().equals(that.getH()) : that.getH() != null) {
+    if (getDatosG() != null ? !getDatosG().equals(that.getDatosG()) : that.getDatosG() != null) {
       return false;
     }
-    if (arguments.containsKey("relacion") != that.arguments.containsKey("relacion")) {
+    if (arguments.containsKey("datosB") != that.arguments.containsKey("datosB")) {
       return false;
     }
-    if (Float.compare(that.getRelacion(), getRelacion()) != 0) {
-      return false;
-    }
-    if (arguments.containsKey("ordenCero") != that.arguments.containsKey("ordenCero")) {
-      return false;
-    }
-    if (getOrdenCero() != that.getOrdenCero()) {
+    if (getDatosB() != null ? !getDatosB().equals(that.getDatosB()) : that.getDatosB() != null) {
       return false;
     }
     return true;
@@ -203,24 +180,22 @@ public class ImagenEspectroFragmentArgs implements NavArgs {
   @Override
   public int hashCode() {
     int result = 1;
-    result = 31 * result + (getBitmap() != null ? getBitmap().hashCode() : 0);
-    result = 31 * result + Float.floatToIntBits(getTita());
-    result = 31 * result + Float.floatToIntBits(getB());
-    result = 31 * result + java.util.Arrays.hashCode(getH());
-    result = 31 * result + Float.floatToIntBits(getRelacion());
-    result = 31 * result + getOrdenCero();
+    result = 31 * result + java.util.Arrays.hashCode(getDatosX());
+    result = 31 * result + java.util.Arrays.hashCode(getDatosL());
+    result = 31 * result + java.util.Arrays.hashCode(getDatosR());
+    result = 31 * result + java.util.Arrays.hashCode(getDatosG());
+    result = 31 * result + java.util.Arrays.hashCode(getDatosB());
     return result;
   }
 
   @Override
   public String toString() {
     return "ImagenEspectroFragmentArgs{"
-        + "bitmap=" + getBitmap()
-        + ", tita=" + getTita()
-        + ", b=" + getB()
-        + ", h=" + getH()
-        + ", relacion=" + getRelacion()
-        + ", ordenCero=" + getOrdenCero()
+        + "datosX=" + getDatosX()
+        + ", datosL=" + getDatosL()
+        + ", datosR=" + getDatosR()
+        + ", datosG=" + getDatosG()
+        + ", datosB=" + getDatosB()
         + "}";
   }
 
@@ -231,20 +206,28 @@ public class ImagenEspectroFragmentArgs implements NavArgs {
       this.arguments.putAll(original.arguments);
     }
 
-    public Builder(@NonNull Bitmap bitmap, float tita, float b, @NonNull float[] h, float relacion,
-        int ordenCero) {
-      if (bitmap == null) {
-        throw new IllegalArgumentException("Argument \"bitmap\" is marked as non-null but was passed a null value.");
+    public Builder(@NonNull int[] datosX, @NonNull float[] datosL, @NonNull float[] datosR,
+        @NonNull float[] datosG, @NonNull float[] datosB) {
+      if (datosX == null) {
+        throw new IllegalArgumentException("Argument \"datosX\" is marked as non-null but was passed a null value.");
       }
-      this.arguments.put("bitmap", bitmap);
-      this.arguments.put("tita", tita);
-      this.arguments.put("b", b);
-      if (h == null) {
-        throw new IllegalArgumentException("Argument \"h\" is marked as non-null but was passed a null value.");
+      this.arguments.put("datosX", datosX);
+      if (datosL == null) {
+        throw new IllegalArgumentException("Argument \"datosL\" is marked as non-null but was passed a null value.");
       }
-      this.arguments.put("h", h);
-      this.arguments.put("relacion", relacion);
-      this.arguments.put("ordenCero", ordenCero);
+      this.arguments.put("datosL", datosL);
+      if (datosR == null) {
+        throw new IllegalArgumentException("Argument \"datosR\" is marked as non-null but was passed a null value.");
+      }
+      this.arguments.put("datosR", datosR);
+      if (datosG == null) {
+        throw new IllegalArgumentException("Argument \"datosG\" is marked as non-null but was passed a null value.");
+      }
+      this.arguments.put("datosG", datosG);
+      if (datosB == null) {
+        throw new IllegalArgumentException("Argument \"datosB\" is marked as non-null but was passed a null value.");
+      }
+      this.arguments.put("datosB", datosB);
     }
 
     @NonNull
@@ -254,77 +237,78 @@ public class ImagenEspectroFragmentArgs implements NavArgs {
     }
 
     @NonNull
-    public Builder setBitmap(@NonNull Bitmap bitmap) {
-      if (bitmap == null) {
-        throw new IllegalArgumentException("Argument \"bitmap\" is marked as non-null but was passed a null value.");
+    public Builder setDatosX(@NonNull int[] datosX) {
+      if (datosX == null) {
+        throw new IllegalArgumentException("Argument \"datosX\" is marked as non-null but was passed a null value.");
       }
-      this.arguments.put("bitmap", bitmap);
+      this.arguments.put("datosX", datosX);
       return this;
     }
 
     @NonNull
-    public Builder setTita(float tita) {
-      this.arguments.put("tita", tita);
-      return this;
-    }
-
-    @NonNull
-    public Builder setB(float b) {
-      this.arguments.put("b", b);
-      return this;
-    }
-
-    @NonNull
-    public Builder setH(@NonNull float[] h) {
-      if (h == null) {
-        throw new IllegalArgumentException("Argument \"h\" is marked as non-null but was passed a null value.");
+    public Builder setDatosL(@NonNull float[] datosL) {
+      if (datosL == null) {
+        throw new IllegalArgumentException("Argument \"datosL\" is marked as non-null but was passed a null value.");
       }
-      this.arguments.put("h", h);
+      this.arguments.put("datosL", datosL);
       return this;
     }
 
     @NonNull
-    public Builder setRelacion(float relacion) {
-      this.arguments.put("relacion", relacion);
+    public Builder setDatosR(@NonNull float[] datosR) {
+      if (datosR == null) {
+        throw new IllegalArgumentException("Argument \"datosR\" is marked as non-null but was passed a null value.");
+      }
+      this.arguments.put("datosR", datosR);
       return this;
     }
 
     @NonNull
-    public Builder setOrdenCero(int ordenCero) {
-      this.arguments.put("ordenCero", ordenCero);
+    public Builder setDatosG(@NonNull float[] datosG) {
+      if (datosG == null) {
+        throw new IllegalArgumentException("Argument \"datosG\" is marked as non-null but was passed a null value.");
+      }
+      this.arguments.put("datosG", datosG);
+      return this;
+    }
+
+    @NonNull
+    public Builder setDatosB(@NonNull float[] datosB) {
+      if (datosB == null) {
+        throw new IllegalArgumentException("Argument \"datosB\" is marked as non-null but was passed a null value.");
+      }
+      this.arguments.put("datosB", datosB);
       return this;
     }
 
     @SuppressWarnings("unchecked")
     @NonNull
-    public Bitmap getBitmap() {
-      return (Bitmap) arguments.get("bitmap");
-    }
-
-    @SuppressWarnings("unchecked")
-    public float getTita() {
-      return (float) arguments.get("tita");
-    }
-
-    @SuppressWarnings("unchecked")
-    public float getB() {
-      return (float) arguments.get("b");
+    public int[] getDatosX() {
+      return (int[]) arguments.get("datosX");
     }
 
     @SuppressWarnings("unchecked")
     @NonNull
-    public float[] getH() {
-      return (float[]) arguments.get("h");
+    public float[] getDatosL() {
+      return (float[]) arguments.get("datosL");
     }
 
     @SuppressWarnings("unchecked")
-    public float getRelacion() {
-      return (float) arguments.get("relacion");
+    @NonNull
+    public float[] getDatosR() {
+      return (float[]) arguments.get("datosR");
     }
 
     @SuppressWarnings("unchecked")
-    public int getOrdenCero() {
-      return (int) arguments.get("ordenCero");
+    @NonNull
+    public float[] getDatosG() {
+      return (float[]) arguments.get("datosG");
+    }
+
+    @SuppressWarnings("unchecked")
+    @NonNull
+    public float[] getDatosB() {
+      return (float[]) arguments.get("datosB");
     }
   }
 }

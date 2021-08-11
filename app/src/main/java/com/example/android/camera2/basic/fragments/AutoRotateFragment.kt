@@ -4,14 +4,7 @@ package com.example.android.camera2.basic.fragments
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
-import android.hardware.camera2.CameraCaptureSession
-import android.hardware.camera2.CameraCharacteristics
-import android.hardware.camera2.CameraDevice
-import android.hardware.camera2.CameraManager
-import android.hardware.camera2.CaptureRequest
-import android.hardware.camera2.CaptureResult
-import android.hardware.camera2.DngCreator
-import android.hardware.camera2.TotalCaptureResult
+import android.hardware.camera2.*
 import android.media.Image
 import android.media.ImageReader
 import android.os.Build
@@ -19,29 +12,22 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.Surface
-import android.view.SurfaceHolder
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.view.*
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.graphics.rotationMatrix
-import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.example.android.camera.utils.computeExifOrientation
-import com.example.android.camera.utils.getPreviewOutputSize
 import com.example.android.camera.utils.AutoFitSurfaceView
 import com.example.android.camera.utils.OrientationLiveData
+import com.example.android.camera.utils.computeExifOrientation
+import com.example.android.camera.utils.getPreviewOutputSize
 import com.example.android.camera2.basic.CameraActivity
 import com.example.android.camera2.basic.R
-import com.example.calibrarlongituddeonda.Autorotar
+import com.example.android.camera2.basic.Autorotar
 import com.example.calibrarlongituddeonda.CalibrarLongOnda
 import kotlinx.android.synthetic.main.fragment_camera.*
 import kotlinx.coroutines.Dispatchers
@@ -52,30 +38,27 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.TimeoutException
-import java.util.Date
-import java.util.Locale
-import kotlin.RuntimeException
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
-import kotlin.math.abs
-import kotlin.math.cos
-import kotlin.math.pow
-import kotlin.math.sin
+import kotlin.math.*
 
 
 class AutoRotateFragment: Fragment() {
 
-    //declaro e inicio variables
-    var tita = 0f //si se llama tita. deberia ser mas descriptivo
+    /** Declaracion de variables a utilizar */
+    var tita = 0f
     var posHorizontalEspectro = 0f
-    var valor = FloatArray(1000) //wtf esto es el vector con las intensidades
     var alto =  100
-    lateinit var canvasParaEditar: Canvas //para enchular los bitmaps hay que hacer esto
-    lateinit var poneleColor: Paint //para ponerle colores
     lateinit var  myBitmap: Bitmap
+    var yi = 0
+    var yf = 0
+    var relacionPixelYLongOnda = 1f
+    var primerMaximo = 0
+    var ordenCero = 0
 
 
     /** AndroidX navigation arguments */
@@ -181,20 +164,25 @@ class AutoRotateFragment: Fragment() {
                 orientation -> Log.d(TAG, "Orientation changed: $orientation")
             })
         }
-        btn_mostrar.setOnClickListener(
-                {
-                        Navigation.findNavController(requireActivity(), R.id.fragment_container)
-                                .navigate(AutoRotateFragmentDirections
-                                        .actionAutoRotateFragmentToCameraFragment(args.cameraId, args.pixelFormat, tita, posHorizontalEspectro))
-                    //Navigation.findNavController(requireActivity(), R.id.fragment_container)
-                      // .navigate(AutoRotateFragmentDirections
-                        //  .actionAutoRotateFragmentToImagenEspectroFragment(myBitmap, tita, posHorizontalEspectro))
-
-                }
-        )
+        /** Acción que ocurre al tocar el botón "siguiente" */
+        btn_mostrar.setOnClickListener {
+            Navigation.findNavController(requireActivity(), R.id.fragment_container)
+                .navigate(
+                    AutoRotateFragmentDirections
+                        .actionAutoRotateFragmentToCameraFragment(
+                            /** Argumentos que pasan al siguiente fragment */
+                            args.cameraId,
+                            args.pixelFormat,
+                            tita,
+                            posHorizontalEspectro,
+                            yi,
+                            yf,
+                            relacionPixelYLongOnda,
+                            ordenCero
+                        )
+                )
+        }
     }
-
-
 
     /**
      * Begin all camera operations in a coroutine in the main thread. This function:
@@ -210,7 +198,7 @@ class AutoRotateFragment: Fragment() {
         // Initialize an image reader which will be used to capture still photos
         val size = characteristics.get(
                 CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)!!
-                .getOutputSizes(args.pixelFormat).maxBy { it.height * it.width }!!
+                .getOutputSizes(args.pixelFormat).maxByOrNull { it.height * it.width }!!
         imageReader = ImageReader.newInstance(
                 size.width, size.height, args.pixelFormat, IMAGE_BUFFER_SIZE)
 
@@ -233,9 +221,6 @@ class AutoRotateFragment: Fragment() {
             // Disable click listener to prevent multiple requests simultaneously in flight
             it.isEnabled = false
 
-
-
-
             // Perform I/O heavy operations in a different scope
             lifecycleScope.launch(Dispatchers.IO) {
                 takePhoto().use { result ->
@@ -245,24 +230,6 @@ class AutoRotateFragment: Fragment() {
                     val output = saveResult(result)
                     Log.d(TAG, "Image saved: ${output.absolutePath}")
 
-                    /**
-                    // If the result is a JPEG file, update EXIF metadata with orientation info
-                    if (output.extension == "jpg") {
-                    val exif = ExifInterface(output.absolutePath)
-                    exif.setAttribute(
-                    ExifInterface.TAG_ORIENTATION, result.orientation.toString())
-                    exif.saveAttributes()
-                    Log.d(TAG, "EXIF metadata saved: ${output.absolutePath}")
-                    }
-
-                    // Display the photo taken to user
-                    lifecycleScope.launch(Dispatchers.Main) {
-                    navController.navigate(CameraFragmentDirections
-                    .actionCameraToJpegViewer(output.absolutePath)
-                    .setOrientation(result.orientation)
-                    .setDepth(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q &&
-                    result.format == ImageFormat.DEPTH_JPEG))
-                    }*/
                 }
 
                 // Re-enable click listener after photo is taken
@@ -351,20 +318,16 @@ class AutoRotateFragment: Fragment() {
         val captureRequest = session.device.createCaptureRequest(
                 CameraDevice.TEMPLATE_STILL_CAPTURE).apply { addTarget(imageReader.surface) }
 
-        /** Ahora el texp  y los otros parametros estan automaticos
-         * Sacarias una foto como en la camara comun, en automatico, capaz queda mejor
-         * Si descomentas esto seteas las cosas como las usamos en las otras clases
-         *
-         *
-        captureRequest.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AF_MODE_OFF)
-        val exposureTime = 100_000_000L
-        captureRequest.set(CaptureRequest.SENSOR_EXPOSURE_TIME, exposureTime) // en nanoSec
-        captureRequest.set(CaptureRequest.SENSOR_SENSITIVITY, 100) //algo fijo
-        captureRequest.set(CaptureRequest.CONTROL_AWB_LOCK, false )
-        captureRequest.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_OFF)
-        */
+        /**Seteo de los parametros de la cámara */
+        captureRequest.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_OFF) //Desactiva el AutoExposure
+        val exposureTime = 600_000L // nanosegundos
+        captureRequest.set(CaptureRequest.SENSOR_EXPOSURE_TIME, exposureTime) // tiempo de exposicion en nanoSec
+        captureRequest.set(CaptureRequest.SENSOR_SENSITIVITY, 500) //valor de sensibilidad ISO estándar. 500 elegido arbitrariamente
+        captureRequest.set(CaptureRequest.CONTROL_AWB_MODE, CaptureRequest.CONTROL_AWB_MODE_OFF ) //Desactiva el balance automatico de blancos
+        captureRequest.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_OFF) //Desactiva el AutoFoco
+        captureRequest.set(CaptureRequest.LENS_FOCUS_DISTANCE, 0f) //Enfoque en el infinito
 
-        //ya saca esa maldita foto
+        //Captura la imagen
         session.capture(captureRequest.build(), object : CameraCaptureSession.CaptureCallback() {
 
             override fun onCaptureStarted(
@@ -432,8 +395,6 @@ class AutoRotateFragment: Fragment() {
     }
 
 
-    lateinit var m : DoubleArray
-    lateinit var m2 : DoubleArray
 
     /** Helper function used to save a [CombinedCaptureResult] into a [File] */
     private suspend fun saveResult(result: CombinedCaptureResult): File = suspendCoroutine { cont ->
@@ -441,28 +402,49 @@ class AutoRotateFragment: Fragment() {
 
             // When the format is JPEG or DEPTH JPEG we can simply save the bytes as-is
             ImageFormat.JPEG, ImageFormat.DEPTH_JPEG -> {
+                /** Datos que entraga la cámara */
                 val buffer = result.image.planes[0].buffer
                 val bytes = ByteArray(buffer.remaining()).apply { buffer.get(this) }
-                //Consigo el bitmap y leo los datos
+                /** Analisis de la imagen */
                 var matrix = rotationMatrix(90f) //las matrices rotan bitmaps
-                myBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                myBitmap = Bitmap.createBitmap(myBitmap, 0, 2*myBitmap.height/5, myBitmap.width, myBitmap.height/5, matrix, true)
+                myBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size) //Crea el Bitmap a partir de los bytes
+                myBitmap = Bitmap.createBitmap(myBitmap, 0, 2*myBitmap.height/5, myBitmap.width, myBitmap.height/5, matrix, true) //Rota y recorta
+
+                /** Calibracion para encontrar el espectro en la imagen */
                 val altoPreRotacion = myBitmap.height
-                println("prerot = $altoPreRotacion")
-                val autorotar = Autorotar(myBitmap)
-                var m = autorotar.m
-                tita = autorotar.tita.toFloat()
-                val b = m[0].toFloat()
-                println("tita = $tita")
-                val tito = 3.1416f*tita/180
-                posHorizontalEspectro = altoPreRotacion*sin((tito+abs(tito))/2)+b*cos(tito)
-                println("Xo = $posHorizontalEspectro")
-                /** TODO: capaz quedaria bonito que muestre el espectro rotado con la linea
-                 * pero ni ahi es prioridad ni util jaja
-                 */
+                val autorotar = Autorotar(myBitmap) //Llama a la clase Autorotar con el Bitmap como argumento
+                val m = autorotar.m //vector que devuelve la calibracion
+                tita = autorotar.tita.toFloat() //angulo que devuelve la calibracion
+                val b = m[0].toFloat() //ordenada al origen
+                val tito = 3.1416f*tita/180 //tita en radianes
+                posHorizontalEspectro = altoPreRotacion*sin((tito+abs(tito))/2)+b*cos(tito) // posicion horizontal del espectro en la imagen ya rotada
 
+                yi = (m[2]-100).toInt() //100 pixeles antes del orden cero
+                yf = (m[3]+200).toInt() //200 pixeles mas del orden uno
+                //Entre estos parametros barremos el espectro
 
+                /** Calibracion en longitud de onda */
+                matrix = rotationMatrix(tita)
+                val bitmapRotado = Bitmap.createBitmap(myBitmap, 0, 0, myBitmap.width, myBitmap.height, matrix, true) //Rota la imagen un angulo tita
+                val alto = bitmapRotado.height
+                val xo = posHorizontalEspectro.toInt()
 
+                val valor = IntArray(alto) //inicializa un array de tamaño=alto
+                for (i in 0 until alto) { //Barre en el eje y
+                    for (j in xo - 2..xo + 2) { //Barre en 5 valores de x centrados en Xo
+                        val aargb = bitmapRotado.getPixel(j, i) //informacion del pixel (j,i)
+                        valor[i] += Color.blue(aargb) //componente azul del pixel
+                    }
+                }
+
+                val calibrar = CalibrarLongOnda() //Llama a la clase CalibrarLongOnda
+                calibrar.maxMinFinder(valor) //Llama a la funcion dentro de la clase, dando valor como argumento
+                ordenCero = calibrar.ordenCero //Posicion del orden cero
+                primerMaximo = calibrar.primerMaximo //Posicion del maximo en 452 nm
+
+                val distLineas = 2000.0 // Distancia entre lineas de la red en nm es 1e6/500 (red de 500 lineas x mm)
+                val o1 = (primerMaximo-ordenCero).toDouble() // Distancia entre el orden cero y el uno
+                relacionPixelYLongOnda = sqrt((distLineas*o1/452.0).pow(2)-o1.pow(2)).toFloat() // Parametro D de la ecuacion de la red
 
                 try {
                     val output = createFile(requireContext(), "jpg")
@@ -473,6 +455,7 @@ class AutoRotateFragment: Fragment() {
                     cont.resumeWithException(exc)
                 }
             }
+
 
             // When the format is RAW we use the DngCreator utility library
             ImageFormat.RAW_SENSOR -> {

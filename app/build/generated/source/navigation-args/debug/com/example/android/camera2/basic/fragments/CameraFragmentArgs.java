@@ -56,6 +56,34 @@ public class CameraFragmentArgs implements NavArgs {
     } else {
       throw new IllegalArgumentException("Required argument \"b\" is missing and does not have an android:defaultValue");
     }
+    if (bundle.containsKey("yi")) {
+      int yi;
+      yi = bundle.getInt("yi");
+      __result.arguments.put("yi", yi);
+    } else {
+      throw new IllegalArgumentException("Required argument \"yi\" is missing and does not have an android:defaultValue");
+    }
+    if (bundle.containsKey("yf")) {
+      int yf;
+      yf = bundle.getInt("yf");
+      __result.arguments.put("yf", yf);
+    } else {
+      throw new IllegalArgumentException("Required argument \"yf\" is missing and does not have an android:defaultValue");
+    }
+    if (bundle.containsKey("relacion")) {
+      float relacion;
+      relacion = bundle.getFloat("relacion");
+      __result.arguments.put("relacion", relacion);
+    } else {
+      throw new IllegalArgumentException("Required argument \"relacion\" is missing and does not have an android:defaultValue");
+    }
+    if (bundle.containsKey("ordenCero")) {
+      int ordenCero;
+      ordenCero = bundle.getInt("ordenCero");
+      __result.arguments.put("ordenCero", ordenCero);
+    } else {
+      throw new IllegalArgumentException("Required argument \"ordenCero\" is missing and does not have an android:defaultValue");
+    }
     return __result;
   }
 
@@ -81,6 +109,26 @@ public class CameraFragmentArgs implements NavArgs {
   }
 
   @SuppressWarnings("unchecked")
+  public int getYi() {
+    return (int) arguments.get("yi");
+  }
+
+  @SuppressWarnings("unchecked")
+  public int getYf() {
+    return (int) arguments.get("yf");
+  }
+
+  @SuppressWarnings("unchecked")
+  public float getRelacion() {
+    return (float) arguments.get("relacion");
+  }
+
+  @SuppressWarnings("unchecked")
+  public int getOrdenCero() {
+    return (int) arguments.get("ordenCero");
+  }
+
+  @SuppressWarnings("unchecked")
   @NonNull
   public Bundle toBundle() {
     Bundle __result = new Bundle();
@@ -99,6 +147,22 @@ public class CameraFragmentArgs implements NavArgs {
     if (arguments.containsKey("b")) {
       float b = (float) arguments.get("b");
       __result.putFloat("b", b);
+    }
+    if (arguments.containsKey("yi")) {
+      int yi = (int) arguments.get("yi");
+      __result.putInt("yi", yi);
+    }
+    if (arguments.containsKey("yf")) {
+      int yf = (int) arguments.get("yf");
+      __result.putInt("yf", yf);
+    }
+    if (arguments.containsKey("relacion")) {
+      float relacion = (float) arguments.get("relacion");
+      __result.putFloat("relacion", relacion);
+    }
+    if (arguments.containsKey("ordenCero")) {
+      int ordenCero = (int) arguments.get("ordenCero");
+      __result.putInt("ordenCero", ordenCero);
     }
     return __result;
   }
@@ -136,6 +200,30 @@ public class CameraFragmentArgs implements NavArgs {
     if (Float.compare(that.getB(), getB()) != 0) {
       return false;
     }
+    if (arguments.containsKey("yi") != that.arguments.containsKey("yi")) {
+      return false;
+    }
+    if (getYi() != that.getYi()) {
+      return false;
+    }
+    if (arguments.containsKey("yf") != that.arguments.containsKey("yf")) {
+      return false;
+    }
+    if (getYf() != that.getYf()) {
+      return false;
+    }
+    if (arguments.containsKey("relacion") != that.arguments.containsKey("relacion")) {
+      return false;
+    }
+    if (Float.compare(that.getRelacion(), getRelacion()) != 0) {
+      return false;
+    }
+    if (arguments.containsKey("ordenCero") != that.arguments.containsKey("ordenCero")) {
+      return false;
+    }
+    if (getOrdenCero() != that.getOrdenCero()) {
+      return false;
+    }
     return true;
   }
 
@@ -146,6 +234,10 @@ public class CameraFragmentArgs implements NavArgs {
     result = 31 * result + getPixelFormat();
     result = 31 * result + Float.floatToIntBits(getTita());
     result = 31 * result + Float.floatToIntBits(getB());
+    result = 31 * result + getYi();
+    result = 31 * result + getYf();
+    result = 31 * result + Float.floatToIntBits(getRelacion());
+    result = 31 * result + getOrdenCero();
     return result;
   }
 
@@ -156,6 +248,10 @@ public class CameraFragmentArgs implements NavArgs {
         + ", pixelFormat=" + getPixelFormat()
         + ", tita=" + getTita()
         + ", b=" + getB()
+        + ", yi=" + getYi()
+        + ", yf=" + getYf()
+        + ", relacion=" + getRelacion()
+        + ", ordenCero=" + getOrdenCero()
         + "}";
   }
 
@@ -166,7 +262,8 @@ public class CameraFragmentArgs implements NavArgs {
       this.arguments.putAll(original.arguments);
     }
 
-    public Builder(@NonNull String cameraId, int pixelFormat, float tita, float b) {
+    public Builder(@NonNull String cameraId, int pixelFormat, float tita, float b, int yi, int yf,
+        float relacion, int ordenCero) {
       if (cameraId == null) {
         throw new IllegalArgumentException("Argument \"camera_id\" is marked as non-null but was passed a null value.");
       }
@@ -174,6 +271,10 @@ public class CameraFragmentArgs implements NavArgs {
       this.arguments.put("pixel_format", pixelFormat);
       this.arguments.put("tita", tita);
       this.arguments.put("b", b);
+      this.arguments.put("yi", yi);
+      this.arguments.put("yf", yf);
+      this.arguments.put("relacion", relacion);
+      this.arguments.put("ordenCero", ordenCero);
     }
 
     @NonNull
@@ -209,6 +310,30 @@ public class CameraFragmentArgs implements NavArgs {
       return this;
     }
 
+    @NonNull
+    public Builder setYi(int yi) {
+      this.arguments.put("yi", yi);
+      return this;
+    }
+
+    @NonNull
+    public Builder setYf(int yf) {
+      this.arguments.put("yf", yf);
+      return this;
+    }
+
+    @NonNull
+    public Builder setRelacion(float relacion) {
+      this.arguments.put("relacion", relacion);
+      return this;
+    }
+
+    @NonNull
+    public Builder setOrdenCero(int ordenCero) {
+      this.arguments.put("ordenCero", ordenCero);
+      return this;
+    }
+
     @SuppressWarnings("unchecked")
     @NonNull
     public String getCameraId() {
@@ -228,6 +353,26 @@ public class CameraFragmentArgs implements NavArgs {
     @SuppressWarnings("unchecked")
     public float getB() {
       return (float) arguments.get("b");
+    }
+
+    @SuppressWarnings("unchecked")
+    public int getYi() {
+      return (int) arguments.get("yi");
+    }
+
+    @SuppressWarnings("unchecked")
+    public int getYf() {
+      return (int) arguments.get("yf");
+    }
+
+    @SuppressWarnings("unchecked")
+    public float getRelacion() {
+      return (float) arguments.get("relacion");
+    }
+
+    @SuppressWarnings("unchecked")
+    public int getOrdenCero() {
+      return (int) arguments.get("ordenCero");
     }
   }
 }

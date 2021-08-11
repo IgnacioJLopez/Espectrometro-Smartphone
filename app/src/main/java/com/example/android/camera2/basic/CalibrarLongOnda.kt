@@ -2,43 +2,39 @@ package com.example.calibrarlongituddeonda
 
 class CalibrarLongOnda() {
 
-
+    /** Declaracion de variables a utilizar */
     var posicionesMaximos = ArrayList<Int>()
     var posicionesMinimos = ArrayList<Int>()
     var ordenCero = 0
     var primerMaximo = 0
     var indiceOrdenCero = 0
+    var oz = ArrayList<Int>()
 
-
-    fun maxMinFinder(intensidades: FloatArray) {
-
-        val ancho = 7 //ancho con el que defino que un punto es un maximo o minimo
+    fun maxMinFinder(intensidades: IntArray) {
+        val ancho = 12 // Ancho con el que defino que un punto es un maximo o minimo
         for (i in ancho+1..intensidades.size - (ancho+1)) {
-            if (intensidades[i] >= intensidades.sliceArray(i-ancho..i-1).max()!! &&
-                intensidades[i] >= intensidades.sliceArray(i+1..i+ancho).max()!! && intensidades[i] > 80)
-            {
-                println("max en $i de ${intensidades[i]}")
-                posicionesMaximos.add(i)
+            /** Si cumple estas condiciones es un máximo */
+            if (intensidades[i] >= intensidades.sliceArray(i-ancho..i-1).maxOrNull()!! &&
+                intensidades[i] >= intensidades.sliceArray(i+1..i+ancho).maxOrNull()!! && intensidades[i] > 100)
+                {
+                posicionesMaximos.add(i) // Adjunta la posicion del maximo al vector de maximos
 
+                /** Si cumple esta condicion es el orden cero */
                 if(intensidades[i]>700){
                     indiceOrdenCero = posicionesMaximos.size-1
+                    oz.add(i) //Adjunta todos los maximos del orden cero (si está saturado)
                 }
             }
 
-            if (intensidades[i] < intensidades.sliceArray(i-ancho..i-1).min()!! &&
-                intensidades[i] < intensidades.sliceArray(i+1..i+ancho).min()!!)
+            /** Si cumple estas condiciones es un mínimo */
+            if (intensidades[i] < intensidades.sliceArray(i-ancho..i-1).minOrNull()!! &&
+                intensidades[i] < intensidades.sliceArray(i+1..i+ancho).minOrNull()!!)
             {
                 println("min en $i de ${intensidades[i]}")
                 posicionesMinimos.add(i)
             }
         }
-
-        ordenCero = posicionesMaximos[indiceOrdenCero]
-        primerMaximo = posicionesMaximos.last()
-
+        ordenCero = (oz.last()+oz.first()).div(2) // Si está saturado usa el punto medio entre los saturados
+        primerMaximo = posicionesMaximos.last() //Maximo en 452 nm
     }
-
-
-    //eso es igual a lambda*nrodelineas/mm supongo que es mil
-
 }

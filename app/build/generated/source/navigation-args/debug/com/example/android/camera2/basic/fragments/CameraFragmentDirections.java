@@ -22,62 +22,82 @@ public class CameraFragmentDirections {
   }
 
   @NonNull
-  public static ActionCameraFragmentToLongOndaFragment actionCameraFragmentToLongOndaFragment(
-      @NonNull String cameraId, int pixelFormat, float tita, float b, @NonNull float[] h) {
-    return new ActionCameraFragmentToLongOndaFragment(cameraId, pixelFormat, tita, b, h);
+  public static ActionCameraFragmentToImagenEspectroFragment actionCameraFragmentToImagenEspectroFragment(
+      @NonNull int[] datosX, @NonNull float[] datosL, @NonNull float[] datosR,
+      @NonNull float[] datosG, @NonNull float[] datosB) {
+    return new ActionCameraFragmentToImagenEspectroFragment(datosX, datosL, datosR, datosG, datosB);
   }
 
-  public static class ActionCameraFragmentToLongOndaFragment implements NavDirections {
+  public static class ActionCameraFragmentToImagenEspectroFragment implements NavDirections {
     private final HashMap arguments = new HashMap();
 
-    private ActionCameraFragmentToLongOndaFragment(@NonNull String cameraId, int pixelFormat,
-        float tita, float b, @NonNull float[] h) {
-      if (cameraId == null) {
-        throw new IllegalArgumentException("Argument \"camera_id\" is marked as non-null but was passed a null value.");
+    private ActionCameraFragmentToImagenEspectroFragment(@NonNull int[] datosX,
+        @NonNull float[] datosL, @NonNull float[] datosR, @NonNull float[] datosG,
+        @NonNull float[] datosB) {
+      if (datosX == null) {
+        throw new IllegalArgumentException("Argument \"datosX\" is marked as non-null but was passed a null value.");
       }
-      this.arguments.put("camera_id", cameraId);
-      this.arguments.put("pixel_format", pixelFormat);
-      this.arguments.put("tita", tita);
-      this.arguments.put("b", b);
-      if (h == null) {
-        throw new IllegalArgumentException("Argument \"h\" is marked as non-null but was passed a null value.");
+      this.arguments.put("datosX", datosX);
+      if (datosL == null) {
+        throw new IllegalArgumentException("Argument \"datosL\" is marked as non-null but was passed a null value.");
       }
-      this.arguments.put("h", h);
+      this.arguments.put("datosL", datosL);
+      if (datosR == null) {
+        throw new IllegalArgumentException("Argument \"datosR\" is marked as non-null but was passed a null value.");
+      }
+      this.arguments.put("datosR", datosR);
+      if (datosG == null) {
+        throw new IllegalArgumentException("Argument \"datosG\" is marked as non-null but was passed a null value.");
+      }
+      this.arguments.put("datosG", datosG);
+      if (datosB == null) {
+        throw new IllegalArgumentException("Argument \"datosB\" is marked as non-null but was passed a null value.");
+      }
+      this.arguments.put("datosB", datosB);
     }
 
     @NonNull
-    public ActionCameraFragmentToLongOndaFragment setCameraId(@NonNull String cameraId) {
-      if (cameraId == null) {
-        throw new IllegalArgumentException("Argument \"camera_id\" is marked as non-null but was passed a null value.");
+    public ActionCameraFragmentToImagenEspectroFragment setDatosX(@NonNull int[] datosX) {
+      if (datosX == null) {
+        throw new IllegalArgumentException("Argument \"datosX\" is marked as non-null but was passed a null value.");
       }
-      this.arguments.put("camera_id", cameraId);
+      this.arguments.put("datosX", datosX);
       return this;
     }
 
     @NonNull
-    public ActionCameraFragmentToLongOndaFragment setPixelFormat(int pixelFormat) {
-      this.arguments.put("pixel_format", pixelFormat);
-      return this;
-    }
-
-    @NonNull
-    public ActionCameraFragmentToLongOndaFragment setTita(float tita) {
-      this.arguments.put("tita", tita);
-      return this;
-    }
-
-    @NonNull
-    public ActionCameraFragmentToLongOndaFragment setB(float b) {
-      this.arguments.put("b", b);
-      return this;
-    }
-
-    @NonNull
-    public ActionCameraFragmentToLongOndaFragment setH(@NonNull float[] h) {
-      if (h == null) {
-        throw new IllegalArgumentException("Argument \"h\" is marked as non-null but was passed a null value.");
+    public ActionCameraFragmentToImagenEspectroFragment setDatosL(@NonNull float[] datosL) {
+      if (datosL == null) {
+        throw new IllegalArgumentException("Argument \"datosL\" is marked as non-null but was passed a null value.");
       }
-      this.arguments.put("h", h);
+      this.arguments.put("datosL", datosL);
+      return this;
+    }
+
+    @NonNull
+    public ActionCameraFragmentToImagenEspectroFragment setDatosR(@NonNull float[] datosR) {
+      if (datosR == null) {
+        throw new IllegalArgumentException("Argument \"datosR\" is marked as non-null but was passed a null value.");
+      }
+      this.arguments.put("datosR", datosR);
+      return this;
+    }
+
+    @NonNull
+    public ActionCameraFragmentToImagenEspectroFragment setDatosG(@NonNull float[] datosG) {
+      if (datosG == null) {
+        throw new IllegalArgumentException("Argument \"datosG\" is marked as non-null but was passed a null value.");
+      }
+      this.arguments.put("datosG", datosG);
+      return this;
+    }
+
+    @NonNull
+    public ActionCameraFragmentToImagenEspectroFragment setDatosB(@NonNull float[] datosB) {
+      if (datosB == null) {
+        throw new IllegalArgumentException("Argument \"datosB\" is marked as non-null but was passed a null value.");
+      }
+      this.arguments.put("datosB", datosB);
       return this;
     }
 
@@ -86,59 +106,62 @@ public class CameraFragmentDirections {
     @NonNull
     public Bundle getArguments() {
       Bundle __result = new Bundle();
-      if (arguments.containsKey("camera_id")) {
-        String cameraId = (String) arguments.get("camera_id");
-        __result.putString("camera_id", cameraId);
+      if (arguments.containsKey("datosX")) {
+        int[] datosX = (int[]) arguments.get("datosX");
+        __result.putIntArray("datosX", datosX);
       }
-      if (arguments.containsKey("pixel_format")) {
-        int pixelFormat = (int) arguments.get("pixel_format");
-        __result.putInt("pixel_format", pixelFormat);
+      if (arguments.containsKey("datosL")) {
+        float[] datosL = (float[]) arguments.get("datosL");
+        __result.putFloatArray("datosL", datosL);
       }
-      if (arguments.containsKey("tita")) {
-        float tita = (float) arguments.get("tita");
-        __result.putFloat("tita", tita);
+      if (arguments.containsKey("datosR")) {
+        float[] datosR = (float[]) arguments.get("datosR");
+        __result.putFloatArray("datosR", datosR);
       }
-      if (arguments.containsKey("b")) {
-        float b = (float) arguments.get("b");
-        __result.putFloat("b", b);
+      if (arguments.containsKey("datosG")) {
+        float[] datosG = (float[]) arguments.get("datosG");
+        __result.putFloatArray("datosG", datosG);
       }
-      if (arguments.containsKey("h")) {
-        float[] h = (float[]) arguments.get("h");
-        __result.putFloatArray("h", h);
+      if (arguments.containsKey("datosB")) {
+        float[] datosB = (float[]) arguments.get("datosB");
+        __result.putFloatArray("datosB", datosB);
       }
       return __result;
     }
 
     @Override
     public int getActionId() {
-      return R.id.action_camera_fragment_to_longOndaFragment;
+      return R.id.action_camera_fragment_to_imagenEspectroFragment;
     }
 
     @SuppressWarnings("unchecked")
     @NonNull
-    public String getCameraId() {
-      return (String) arguments.get("camera_id");
-    }
-
-    @SuppressWarnings("unchecked")
-    public int getPixelFormat() {
-      return (int) arguments.get("pixel_format");
-    }
-
-    @SuppressWarnings("unchecked")
-    public float getTita() {
-      return (float) arguments.get("tita");
-    }
-
-    @SuppressWarnings("unchecked")
-    public float getB() {
-      return (float) arguments.get("b");
+    public int[] getDatosX() {
+      return (int[]) arguments.get("datosX");
     }
 
     @SuppressWarnings("unchecked")
     @NonNull
-    public float[] getH() {
-      return (float[]) arguments.get("h");
+    public float[] getDatosL() {
+      return (float[]) arguments.get("datosL");
+    }
+
+    @SuppressWarnings("unchecked")
+    @NonNull
+    public float[] getDatosR() {
+      return (float[]) arguments.get("datosR");
+    }
+
+    @SuppressWarnings("unchecked")
+    @NonNull
+    public float[] getDatosG() {
+      return (float[]) arguments.get("datosG");
+    }
+
+    @SuppressWarnings("unchecked")
+    @NonNull
+    public float[] getDatosB() {
+      return (float[]) arguments.get("datosB");
     }
 
     @Override
@@ -149,35 +172,35 @@ public class CameraFragmentDirections {
       if (object == null || getClass() != object.getClass()) {
           return false;
       }
-      ActionCameraFragmentToLongOndaFragment that = (ActionCameraFragmentToLongOndaFragment) object;
-      if (arguments.containsKey("camera_id") != that.arguments.containsKey("camera_id")) {
+      ActionCameraFragmentToImagenEspectroFragment that = (ActionCameraFragmentToImagenEspectroFragment) object;
+      if (arguments.containsKey("datosX") != that.arguments.containsKey("datosX")) {
         return false;
       }
-      if (getCameraId() != null ? !getCameraId().equals(that.getCameraId()) : that.getCameraId() != null) {
+      if (getDatosX() != null ? !getDatosX().equals(that.getDatosX()) : that.getDatosX() != null) {
         return false;
       }
-      if (arguments.containsKey("pixel_format") != that.arguments.containsKey("pixel_format")) {
+      if (arguments.containsKey("datosL") != that.arguments.containsKey("datosL")) {
         return false;
       }
-      if (getPixelFormat() != that.getPixelFormat()) {
+      if (getDatosL() != null ? !getDatosL().equals(that.getDatosL()) : that.getDatosL() != null) {
         return false;
       }
-      if (arguments.containsKey("tita") != that.arguments.containsKey("tita")) {
+      if (arguments.containsKey("datosR") != that.arguments.containsKey("datosR")) {
         return false;
       }
-      if (Float.compare(that.getTita(), getTita()) != 0) {
+      if (getDatosR() != null ? !getDatosR().equals(that.getDatosR()) : that.getDatosR() != null) {
         return false;
       }
-      if (arguments.containsKey("b") != that.arguments.containsKey("b")) {
+      if (arguments.containsKey("datosG") != that.arguments.containsKey("datosG")) {
         return false;
       }
-      if (Float.compare(that.getB(), getB()) != 0) {
+      if (getDatosG() != null ? !getDatosG().equals(that.getDatosG()) : that.getDatosG() != null) {
         return false;
       }
-      if (arguments.containsKey("h") != that.arguments.containsKey("h")) {
+      if (arguments.containsKey("datosB") != that.arguments.containsKey("datosB")) {
         return false;
       }
-      if (getH() != null ? !getH().equals(that.getH()) : that.getH() != null) {
+      if (getDatosB() != null ? !getDatosB().equals(that.getDatosB()) : that.getDatosB() != null) {
         return false;
       }
       if (getActionId() != that.getActionId()) {
@@ -189,23 +212,23 @@ public class CameraFragmentDirections {
     @Override
     public int hashCode() {
       int result = 1;
-      result = 31 * result + (getCameraId() != null ? getCameraId().hashCode() : 0);
-      result = 31 * result + getPixelFormat();
-      result = 31 * result + Float.floatToIntBits(getTita());
-      result = 31 * result + Float.floatToIntBits(getB());
-      result = 31 * result + java.util.Arrays.hashCode(getH());
+      result = 31 * result + java.util.Arrays.hashCode(getDatosX());
+      result = 31 * result + java.util.Arrays.hashCode(getDatosL());
+      result = 31 * result + java.util.Arrays.hashCode(getDatosR());
+      result = 31 * result + java.util.Arrays.hashCode(getDatosG());
+      result = 31 * result + java.util.Arrays.hashCode(getDatosB());
       result = 31 * result + getActionId();
       return result;
     }
 
     @Override
     public String toString() {
-      return "ActionCameraFragmentToLongOndaFragment(actionId=" + getActionId() + "){"
-          + "cameraId=" + getCameraId()
-          + ", pixelFormat=" + getPixelFormat()
-          + ", tita=" + getTita()
-          + ", b=" + getB()
-          + ", h=" + getH()
+      return "ActionCameraFragmentToImagenEspectroFragment(actionId=" + getActionId() + "){"
+          + "datosX=" + getDatosX()
+          + ", datosL=" + getDatosL()
+          + ", datosR=" + getDatosR()
+          + ", datosG=" + getDatosG()
+          + ", datosB=" + getDatosB()
           + "}";
     }
   }

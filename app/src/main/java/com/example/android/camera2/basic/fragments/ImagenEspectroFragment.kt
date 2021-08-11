@@ -1,100 +1,113 @@
 package com.example.android.camera2.basic.fragments
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import androidx.core.graphics.rotationMatrix
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.example.android.camera2.basic.CameraActivity
 import com.example.android.camera2.basic.R
-import com.example.calibrarlongituddeonda.Autorotar
+import kotlinx.android.synthetic.main.imagen_espectro.*
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
-import kotlin.math.abs
-import kotlin.math.cos
-import kotlin.math.sin
-import kotlin.math.tan
+import java.io.File
+import java.io.OutputStream
+import java.util.*
+import kotlin.math.*
 
 class ImagenEspectroFragment: Fragment() {
-    private val args: ImagenEspectroFragmentArgs by navArgs() //con esto recibo datos de otros fragmentos
-    lateinit var canvasParaEditar: Canvas //para enchular los bitmaps hay que hacer esto
-    lateinit var poneleColor: Paint //para ponerle colores
-    lateinit var myBitmap: Bitmap
+
+    /** Declaracion de variables a utilizar */
+    private val args: ImagenEspectroFragmentArgs by navArgs() // Recibe los datos del fragment anterior
+    var datos = StringBuilder() // Vector vacio para guardar los datos en un .csv
+    lateinit var graphview: GraphView
+    var series = LineGraphSeries<DataPoint>() // Vector vacio para graficar los datos
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.imagen_espectro, container, false)
-        var tita = args.tita
-        val posHorizontalEspectro = args.b
-        var matrix = rotationMatrix(tita)
-        myBitmap = Bitmap.createBitmap(args.bitmap)//, 0, 0, args.bitmap.width, args.bitmap.height, matrix, true)
-        var bitmapRotado = Bitmap.createBitmap(myBitmap, 0, 0, myBitmap.width, myBitmap.height, matrix, true)
-        println("tita2 = $tita")
-        println("Xo2 = $posHorizontalEspectro")
-        var alto = bitmapRotado.height
 
-        var graphview: GraphView = view.findViewById(R.id.graph) as GraphView
-        var series = LineGraphSeries<DataPoint>()
+        graphview = view.findViewById(R.id.graph) as GraphView
+        datos.append("Pixel, Longitud de onda (nm), R, G, B") // Primera linea del .csv
+        /** Vectores que entrega el fragment anterior */
+        var datosX = args.datosX
+        var datosL = args.datosL
+        var datosR = args.datosR
+        var datosG = args.datosG
+        var datosB = args.datosB
 
-        for(i in 0..alto-1){
-            var b = ((i-args.ordenCero)*args.relacion).toDouble()
-            var argb = bitmapRotado.getPixel(args.b.toInt(), i)
-            //var c = valor[i].toDouble()
-            //var b = i.toDouble()
-            var c = correcionIntensidad((Color.red(argb) + Color.blue(argb) + Color.green(argb)).toDouble())
-            series.appendData(DataPoint(b, c), true, alto-1)
+        /** Declaracion de más variables a utilizar */
+        var alto = datosL.size
+        var x: Double
+        var l: Double
+        var r: Double
+        var g: Double
+        var b: Double
+
+        /** Loop para llenar los vectores que se utilizaran para graficar y guardar */
+        for(i in 0 until alto){
+            x = datosX[i].toDouble()
+            l = datosL[i].toDouble()
+            r = datosR[i].toDouble()
+            g = datosG[i].toDouble()
+            b = datosB[i].toDouble()
+            series.appendData(DataPoint(l, (r+g+b).pow(2)*(1e-5)/(0.6)), true, alto-1) // Valores a graficar
+            datos.append("\n$x,$l, $r, $g, $b") // Valores a guardar en el .csv
         }
 
+        /** Configuracion de los parametros del gráfico */
         graphview.viewport.isXAxisBoundsManual = true
-        graphview.viewport.setMinX(310.0)
-        graphview.viewport.setMaxX(720.0)
+        graphview.viewport.setMinX(400.0)
+        graphview.viewport.setMaxX(670.0)
+        graphview.viewport.setMaxY(1.0)
+        graphview.viewport.setMinY(0.0)
+        graphview.viewport.isScrollable
+        graphview.viewport.setScrollableY(true)
         graphview.gridLabelRenderer.horizontalAxisTitle = "Longitud de onda (nm)"
         graphview.gridLabelRenderer.verticalAxisTitle = "Intensidad (u.a.)"
         graphview.addSeries(series)
 
-
-
-
-        /*canvasParaEditar = Canvas(bitmapRotado)
-        poneleColor = Paint()
-        poneleColor.color = Color.argb(255, 0, 100, 255)
-        canvasParaEditar.drawLine(posHorizontalEspectro, 0.0f,
-                posHorizontalEspectro, bitmapRotado.height.toFloat(),
-                        poneleColor)
-        val imagenFinal = ImageView(requireContext()) //inicialization
-        imagenFinal.layoutParams = LinearLayout.LayoutParams(bitmapRotado.width, bitmapRotado.height)
-
-        imagenFinal.x = 0f
-        imagenFinal.y = 0f
-        imagenFinal.setImageBitmap(bitmapRotado)
-        layout?.addView(imagenFinal)*/
-
         return view
-
-
     }
 
-    fun correcionIntensidad(V:Double): Double{
-        val a = args.h[2]
-        val b = args.h[1]
-        val c = args.h[0]
-        if (V > 150){
-            return (a*V*V+b*V+c)*V
-        } else{
-            return V
+    /** Función para guardar y compartir los datos */
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        btn_exportar.setOnClickListener {
+            val datazo = (datos.toString()).toByteArray()
+            Log.d("boton", "bytes = ${datazo.size}")
+            val date = Date()
+            val nombre = "${date.time}.csv"
+            Log.d("boton", nombre)
+            try {
+                /** Guarda el archivo */
+                val out: OutputStream? = context?.openFileOutput(nombre, Context.MODE_PRIVATE)
+                out?.write(datazo)
+                out?.close()
+                /** Exporta el archivo */
+                val context: Context = requireContext().applicationContext
+                val filelocation: File = File(context.filesDir, nombre)
+                val path: Uri = FileProvider.getUriForFile(
+                    context,
+                    "com.example.android.camera2.basic.fileprovider",
+                    filelocation
+                )
+                val fileIntent: Intent = Intent(Intent.ACTION_SEND)
+                fileIntent.setType("text/csv")
+                fileIntent.putExtra(Intent.EXTRA_SUBJECT, "Datos")
+                fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                fileIntent.putExtra(Intent.EXTRA_STREAM, path)
+                startActivity(Intent.createChooser(fileIntent, "send mail"))
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
         }
-
     }
-
-
 
 }
